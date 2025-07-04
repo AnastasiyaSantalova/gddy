@@ -1,18 +1,19 @@
 # Godaddy Repositories Viewer
 
-This is a small React application built for a test assignment.  
+A simple React application built for a test assignment.  
 It fetches repositories from [GoDaddy’s GitHub](https://github.com/godaddy) public API and displays:
 - A list of repositories with title and description.
-- Details for each repository with more info: description, main language, forks, open issues, watchers, and a link to GitHub.
+- A details page for each repository with main info: description, language, forks, open issues, watchers, and link to GitHub.
 
 ---
 
 ## **Stack**
 
-- **Vite + React + TypeScript** — modern and fast setup for React apps.
-- **react-router-dom** — for routing between list and details pages.
-- **Vitest + Testing Library** — for unit and integration testing.
-- **CSS Modules** — for simple and scoped styling.
+- **Vite + React + TypeScript** — modern and fast dev setup.
+- **react-router-dom** — for client-side routing.
+- **Vitest + Testing Library** — for unit and integration tests.
+- **CSS Modules** — for scoped styling with global design tokens (colors, fonts).
+- **ESLint (Flat config)** — for code quality.
 
 ---
 
@@ -40,19 +41,26 @@ The app will be available at http://localhost:5173
 ## **Features**
 
 - Fetches data from the GitHub REST API.
-- Shows a list of all repositories in the GoDaddy organization.
-- Click on a repo to see its details on a separate page.
-- Handles loading and error states.
-- Includes unit tests for:
-    - API fetch functions
-    - Components: list & details (happy paths and error states)
+- Displays all GoDaddy repos in a clean list.
+- Click a repo to see its details on a separate page.
+- Handles loading and error states gracefully.
+- Uses Layout with header, logo link, and footer.
+- The logo links back to home — and is disabled on the homepage for UX.
+- Includes a go back link on the details page (using useNavigate).
+- Uses semantic HTML (<main>, <header>, <footer>).
+- UI colors and fonts are stored as CSS variables for easy theming.
+- Includes tests for:
+    - API services (fetchRepos, fetchRepoDetails)
+    - Components (RepoList, RepoDetails)
+    - Routes (AppRoutes) to ensure correct rendering.
 
 ---
 
 ## **Styling**
-Basic styling is done using CSS Modules.
-It includes hover states, spacing, and clear link styles.
-No extra frameworks like Tailwind were used to keep it minimal and focused.
+- Basic styling with CSS Modules.
+- Shared colors, fonts, and spacing are stored as CSS custom properties in :root.
+- Global typography uses the Inter font (from Google Fonts) for a clean, modern look.
+- Container width and responsive spacing to keep UI readable.
 
 ---
 
@@ -68,6 +76,7 @@ Given more time, I would:
 - Add pagination or infinite scroll for large orgs.
 - Cache API responses to reduce requests.
 - Add more UI/UX polish and responsive design.
+- Improve responsive design for mobile.
 - Show multiple languages per repo if available.
 - Use environment variables for base API URL.
 
@@ -75,24 +84,27 @@ Given more time, I would:
 
 ## **Project structure**
 
-    ```bash
     /src
-    ├── /assets
-    │ └── react.svg
     ├── /components
-    │ ├── /RepoList
-    │ │ ├── RepoList.tsx
-    │ │ ├── RepoList.module.css
-    │ │ ├── RepoList.test.tsx
-    │ ├── /RepoDetails
-    │ │ ├── RepoDetails.tsx
-    │ │ ├── RepoDetails.module.css
-    │ │ ├── RepoDetails.test.tsx
+    │   ├── /RepoList
+    │   │   ├── RepoList.tsx
+    │   │   ├── RepoList.module.css
+    │   │   ├── RepoList.test.tsx
+    │   ├── /RepoDetails
+    │   │   ├── RepoDetails.tsx
+    │   │   ├── RepoDetails.module.css
+    │   │   ├── RepoDetails.test.tsx
+    ├── /routes
+    │   ├── AppRoutes.tsx
+    │   ├── AppRoutes.test.tsx
     ├── /services
-    │ ├── api.ts
-    │ ├── api.test.ts
+    │   ├── api.ts
+    │   ├── api.test.ts
+    ├── /constants
+    │   ├── strings.ts
+    ├── Layout.tsx
+    ├── Layout.module.css
     ├── App.tsx
-    ├── App.css
     ├── main.tsx
     ├── index.css
     ├── setupTests.ts
@@ -101,4 +113,3 @@ Given more time, I would:
 ---
 
 ## **Thank you!**
-Thank you for reviewing this project — I hope it clearly demonstrates my thought process, clean code, and ability to balance simple structure with testability.

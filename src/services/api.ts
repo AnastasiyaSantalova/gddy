@@ -1,3 +1,5 @@
+import { API_ERROR_TEXT, REPO_DETAILS_ERROR_TEXT } from '../constants/strings';
+
 export interface Repo {
   id: number;
   name: string;
@@ -14,7 +16,7 @@ const BASE_URL = 'https://api.github.com/orgs/godaddy';
 export async function fetchRepos(): Promise<Repo[]> {
   const response = await fetch(`${BASE_URL}/repos`);
   if (!response.ok) {
-    throw new Error('Failed to fetch repos');
+    throw new Error(API_ERROR_TEXT);
   }
   return await response.json();
 }
@@ -22,7 +24,7 @@ export async function fetchRepos(): Promise<Repo[]> {
 export async function fetchRepoDetails(name: string): Promise<Repo> {
   const response = await fetch(`https://api.github.com/repos/godaddy/${name}`);
   if (!response.ok) {
-    throw new Error(`Failed to fetch repo: ${name}`);
+    throw new Error(`${REPO_DETAILS_ERROR_TEXT}: ${name}`);
   }
   return await response.json();
 }

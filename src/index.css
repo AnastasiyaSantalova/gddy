@@ -1,0 +1,41 @@
+:root {
+  /* Color palette */
+  /* Brand colors */
+  --color-primary: #0070f3;
+  --color-primary-hover: #0059c1;
+
+  /* Neutral palette */
+  --color-background: #ffffff;
+  --color-background-light: #e4f1ef;
+  --color-background-dark: #000000;
+  --color-text: #222222;
+  --color-text-light: #ffffff;
+  --color-muted: #eee8e0;
+  --color-border: #e5e7eb;
+
+  /* States */
+  --color-error: #e63946;
+  --color-success: #2a9d8f;
+
+
+  /* Layout variables */
+  --max-screen-width: 1200px;
+  --container-width: 90vw;
+  --container-height: 100vh;
+  --container-padding: 2rem;
+
+
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+
+body {
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: 'Inter', system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}

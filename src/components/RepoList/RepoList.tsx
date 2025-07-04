@@ -1,7 +1,12 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { fetchRepos, type Repo } from "../../services/api";
-import styles from "./RepoList.module.css";
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { fetchRepos, type Repo } from '../../services/api';
+import styles from './RepoList.module.css';
+import {
+  LOADING_TEXT,
+  NO_REPOS_TEXT,
+  REPO_LIST_TITLE,
+} from '../../constants/strings';
 
 export default function RepoList() {
   const [repos, setRepos] = useState<Repo[]>([]);
@@ -14,6 +19,7 @@ export default function RepoList() {
         setRepos(data);
       } catch (error) {
         console.error(error);
+        setRepos([]);
       } finally {
         setLoading(false);
       }
@@ -22,18 +28,24 @@ export default function RepoList() {
     loadRepos();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p>{LOADING_TEXT}</p>;
 
   return (
     <div>
-      <h1>Godaddy Repositories</h1>
+      <h1>{REPO_LIST_TITLE}</h1>
       <ul className={styles.list}>
-        {repos.map((repo) => (
-          <li key={repo.id} className={styles.item}>
-            <Link to={`/repo/${repo.name}`}>{repo.name}</Link>
-            <p className={styles.description}>{repo.description}</p>
-          </li>
-        ))}
+        {repos.length ? (
+          repos.map((repo) => (
+            <Link className={styles.item} to={`/repo/${repo.name}`}>
+              <li key={repo.id}>
+                <h2>{repo.name}</h2>
+                <p className={styles.description}>{repo.description}</p>
+              </li>
+            </Link>
+          ))
+        ) : (
+          <p>{NO_REPOS_TEXT}</p>
+        )}
       </ul>
     </div>
   );
